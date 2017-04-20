@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="../fonts/iconfont.css">
 		<link rel="stylesheet" href="../css/layer.css">
 		<link rel="stylesheet" href="../css/app.css">
+		<link rel="stylesheet" href="../css/ticket.css">
 		<style type="text/css">
 			.bg-top{
 				z-index: 1;
@@ -105,41 +106,6 @@
 			    from { transform: rotateY(180deg); }
 			    to { transform: rotateY(360deg); }
 			}
-			/*券*/
-			.tk-warp{
-				position: relative;
-				width: 80%;
-				margin-top: 20px;
-				margin-left: 10%;
-				padding-bottom: 6px;
-				border-radius: 6px;
-				background-size: 100% 100%;
-				text-align: left;
-			}
-			.tkbg1{background-image: url(../img/bg-tk-1.jpg)}
-			.tkbg2{background-image: url(../img/bg-tk-2.jpg)}
-			.tk-warp .tkicon{
-				width: 44px;
-				height: 44px;
-				margin: 10px 10px 10px 16px;
-				border-radius: 50%;
-				vertical-align: middle;
-			}
-			.tk-warp .tkname{
-				color: white;
-			}
-			.tk-warp .tktip-left{
-				font-size: 12px;
-				margin: 10px 10px 0 16px;
-				color: gray;
-			}
-			.tk-warp .tktip-right{
-				position: absolute;
-				right: 10px;
-				bottom: 6px;
-				font-size: 12px;
-				color: gray;
-			}
 			/*底部*/
 			.wb-footer{
 				text-align: center;
@@ -182,7 +148,7 @@
 				<img class="tkicon" src="../img/logo.png"/>
 				<span class="tkname">赠送5积分</span>
 				<p class="tktip-left">10积分=1元</p>
-				<p class="tktip-right">有效期至: 2015.04.06</p>
+				<p class="tktip-right">全场通用</p>
 			</div>
 			<div class="tk-warp tkbg2">
 				<img class="tkicon" src="../img/logo.png"/>
@@ -200,6 +166,7 @@
 	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 	<script src="../js/app.js" charset="utf-8"></script>
 	<script src="../js/layer.js" charset="utf-8"></script>
+	<script src="../js/ticket.js" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 		$(function(){
 			//红包口令
@@ -214,6 +181,15 @@
 					$(this).addClass("anim_rotate");
 					takeRegbag(pass);
 				}
+			})
+			
+			//我的钱包
+			$(".btn-user").click(function(){
+				openWindow("../user/center.html");
+			})
+			//商家评价
+			$(".btn-com").click(function(){
+				openWindow("../main/common.html");
 			})
 		});
 		
