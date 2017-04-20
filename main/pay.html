@@ -33,6 +33,10 @@
 			.allprice::-webkit-input-placeholder{
 				color: #FFA73A;
 			}
+			.moneydetail{
+				line-height: 24px;
+				padding-left: 10%;
+			}
 		</style>
 	</head>
 
@@ -43,7 +47,13 @@
 		</div>
 		<div class="wb-content">
 			<p class="allpricetip">支付订单金额</p>
-			<input class="allprice" placeholder="请输入支付的订单金额"/>
+			<input class="allprice" placeholder="请输入支付的订单金额" value="50.00"/>
+			<div class="moneydetail">
+				<p><span>订单总额:</span> <span class="red">50.00元</span></p>
+				<p><span>使用积分:</span> <span class="red">100积分 抵1元</span></p>
+				<p><span>使用优惠券:</span> <span class="red">-10元</span></p>
+				<p><span>应支付:</span> <span class="red">39.00元</span></p>
+			</div>
 			<div id="ticketList"></div>
 		</div>
 		<p class="wb-footer wb-btn btn-red">和店员已确认,立即买单</p>
