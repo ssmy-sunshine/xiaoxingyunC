@@ -172,12 +172,24 @@ function ajaxData(url,success,param,err,hideWait) {
 var UserObj={
 	/*获取本地缓存的用户Uid*/
 	getUid : function() {
-		var Uid=localStorage.getItem("Uid")||0;
-		if (Uid) Uid=Number(Uid);
+		var Uid=localStorage.getItem("Uid");
+		if(!Uid){
+			Uid=UserObj.getRandomNum(32);
+			UserObj.setUid(Uid);
+		}
 		return Uid;
 	},
 	setUid : function(Uid){
 		setLocalStorage("Uid",Uid);
+	},
+	getRandomNum : function(n) {
+	    var res = "";
+	    var chars = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+	    for(var i = 0; i < n ; i ++) {
+	        var id = Math.ceil(Math.random()*35);
+	        res += chars[id];
+	    }
+	    return res;
 	},
 	/*获取本地缓存的用户手机号*/
 	getTel : function() {
@@ -279,6 +291,15 @@ var UserObj={
 //		},param,function(){
 //			callback&&callback();
 //		},true);
+	}
+}
+
+/*设置localStorage,如果value不存在则移除*/
+function setLocalStorage(key,value){
+	if(value){
+		localStorage.setItem(key,value);
+	}else{
+		localStorage.removeItem(key);
 	}
 }
 
