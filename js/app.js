@@ -92,7 +92,7 @@ function ajaxData(url,success,param,err,hideWait) {
 		//重试次数,默认3次
 		if(!param.tryNum) param.tryNum=0;
 		if(param.tryNum>=3) {
-			mui.toast("请求超时,请重试");
+			layerUtil.toast("请求超时,请重试");
 			return;
 		}
 		param.tryNum++;
@@ -305,13 +305,15 @@ function setLocalStorage(key,value){
 
 /*layerUtil*/
 var layerUtil={
+	index:0,
 	/*显示进度条*/
 	showWaiting:function(){
-		layer.open({type: 2,shade: false});
+		if(layerUtil.index==0) layerUtil.index=layer.open({type: 2,shade: false});
 	},
 	/*关闭进度条*/
 	closeWaiting:function(){
-		layer.close(layer.index);
+		layer.close(layerUtil.index);
+		layerUtil.index=0;
 	},
 	/*提示*/
 	toast:function(msg){
