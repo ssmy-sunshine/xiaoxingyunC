@@ -143,6 +143,10 @@
 				color: white;
 			}
 			/*领取明细*/
+			.userbtile{
+				font-size: 15px;
+				margin-top: 10px;
+			}
 			.takeline{
 				width: 80%;
 				margin-top: 28px;
@@ -215,7 +219,6 @@
 			.sharetipimg img{
 				width: 80%;
 			}
-			.userBtake{margin-top: 20px}
 			.userC-block{display: none;}
 			.userB-block{display: none;}
 		</style>
@@ -259,7 +262,8 @@
 			</div>
 			<!--邀请人显示的界面-->
 			<div class="userB-block">
-				<p class="userBtake"><span>当前共获得邀请奖励:</span> <span id="userBprofit" class="red">0.00元</span></p>
+				<p class="userbtile"><span>总额:</span> <span class="totalmoney pink monery">0.00</span> &nbsp; <span>个数:</span> <span class="count pink">0</span></p>
+				<p class="userbtile"><span>当前共获得邀请奖励:</span> <span id="userBprofit" class="red">0.00元</span></p>
 				<p class="takeline"></p>
 				<p class="taketitle gray"><span>领取明细</span> <span class="pink">( <span id="takecount">0</span> / <span class="count">0</span> )</span></p>
 				<ul id="takelist" class="takelist">
@@ -332,13 +336,20 @@
 				if(data){
 					curRedBagInfo=data;
 					//根据口令查询当前用户的红包,检查是否已抢过
-					getRegbagByPass(pass,function(data){
-						if(data){
+					getRegbagByPass(pass,function(obj){
+						if(obj){
 							//已抢过
 							$(".resultinfo").show();
 							$(".takeinfo").show();
-							$(".takemoney").text(data.money.toFixed(2));
+							$(".takemoney").text(obj.money.toFixed(2));
 							$(".redbag-detail").show();
+							if(curRedBagInfo){
+								var st='';
+								if(curRedBagInfo.score) st+=getScoreStr("赠送"+curRedBagInfo.score);
+								if(curRedBagInfo.ticketId) st+=getTicketStr("赠送"+curRedBagInfo.ticketId);
+								if(curRedBagInfo.morepass&&curRedBagInfo.profit) st+=getMoreBagStr(curRedBagInfo.morepass,curRedBagInfo.profit);
+								$("#ticketList").html(st);
+							}
 						}else{
 							//未抢过
 							$(".reg-warp").show();
@@ -430,8 +441,7 @@
 			var param={"pass":pass};
 			ajaxData(Host+"All?SL=RedPacket&SLM=getdetail", function(data) {
 				$(".count").html(data.count);
-//				$(".totalmoney").html(data.money.toFixed(2));
-//				$(".remark").html(data.remark);
+				$(".totalmoney").html(data.money.toFixed(2));
 			},param);
 		}
 		
@@ -455,7 +465,7 @@
 						str+='<span class="takename">小幸运'+getNickName(detail.takeuser)+'</span>';
 						str+='<span class="takemoney">'+detail.money.toFixed(2)+'</span>';
 						if(detail.inviter){
-							str+='<span class="inviter">邀请人'+getNickName(detail.inviter)+'奖¥'+detail.profit+'</span>';
+							str+='<span class="inviter">邀请人('+getNickName(detail.inviter)+')奖励'+detail.profit+'元</span>';
 							allprofit+=detail.profit;
 						}
 						str+='<span class="taketime">'+detail.taketime+'</span>';

@@ -30,6 +30,7 @@
 				z-index: 2;
 				position: relative;
 				padding-top: 40px;
+				padding-bottom: 80px;
 				text-align: center;
 			}
 			.usericon{
@@ -119,6 +120,8 @@
 			}
 			/*底部*/
 			.wb-footer{
+				padding: 4px;
+				background-color: white;
 				text-align: center;
 			}
 			.wb-footer p{
@@ -198,13 +201,20 @@
 				if(data){
 					curRedBagInfo=data;
 					//根据口令查询当前用户的红包,检查是否已抢过
-					getRegbagByPass(pass,function(data){
-						if(data){
+					getRegbagByPass(pass,function(obj){
+						if(obj){
 							//已抢过
 							$(".resultinfo").show();
 							$(".takeinfo").show();
-							$(".takemoney").text(data.money.toFixed(2));
+							$(".takemoney").text(obj.money.toFixed(2));
 							$(".redbag-detail").show();
+							if(curRedBagInfo){
+								var st='';
+								if(curRedBagInfo.score) st+=getScoreStr("赠送"+curRedBagInfo.score);
+								if(curRedBagInfo.ticketId) st+=getTicketStr("赠送"+curRedBagInfo.ticketId);
+								if(curRedBagInfo.morepass&&curRedBagInfo.profit) st+=getMoreBagStr(curRedBagInfo.morepass,curRedBagInfo.profit);
+								$("#ticketList").html(st);
+							}
 						}else{
 							//未抢过
 							$(".reg-warp").show();
@@ -281,14 +291,14 @@
 					$(".takeinfo").show();
 					if(curRedBagInfo){
 						var st='';
-						if(curRedBagInfo.score) st+=getScoreStr(curRedBagInfo.score);
-						if(curRedBagInfo.ticketId) st+=getTicketStr(curRedBagInfo.ticketId);
-						if(curRedBagInfo.morepass&&curRedBagInfo.moreprofit) st+=getMoreBagStr(curRedBagInfo.morepass,curRedBagInfo.moreprofit);
+						if(curRedBagInfo.score) st+=getScoreStr("赠送"+curRedBagInfo.score);
+						if(curRedBagInfo.ticketId) st+=getTicketStr("赠送"+curRedBagInfo.ticketId);
+						if(curRedBagInfo.morepass&&curRedBagInfo.profit) st+=getMoreBagStr(curRedBagInfo.morepass,curRedBagInfo.profit);
 						$("#ticketList").html(st);
 					}
 				}else{
 					//红包已抢完
-					$(".takeout").text(data.Msg||"手慢了,红包已抢光");
+					$(".takeout").text(data.Msg||"手慢了,红包已抢光").show();
 				}
 				$(".resultinfo").show();
 				$(".redbag-detail").show();

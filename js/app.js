@@ -377,7 +377,7 @@ function EmptyBox(tip,btntext,btnCallback,src) {
 	this.tip = tip==null ? "亲,暂无相关数据~" : tip;//默认提示:"亲,暂无相关数据~"
 	this.btntext=btntext||"";
 	this.btnCallback=btnCallback;
-	this.src=src||"../img/loading-sq.png";
+	this.src=src||"../img/empty-icon.png";
 }
 EmptyBox.prototype.show=function(id_obj,top) {
 	var box = document.createElement("div");

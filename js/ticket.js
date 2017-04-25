@@ -38,12 +38,12 @@ function getTicketStr(ticket){
 }
 
 /*裂变红包*/
-function getMoreBagStr(morepass,moreprofit){
+function getMoreBagStr(morepass,profit){
 	var str='';
 	str+='<div class="morepass tk-warp tkbg2" morepass="'+morepass+'">';
 	str+='<img class="tkicon" src="../img/logo.png"/>';
 	str+='<span class="tkname">裂变红包 快邀请好友来抢 数量有限</span>';
-	str+='<p class="tktip-left">好友每抢一个红包,您将获得'+moreprofit+'元奖励</p>';
+	str+='<p class="tktip-left">好友每抢一个红包,您将获得'+profit+'元奖励</p>';
 	str+='</div>';
 	return str;
 }
