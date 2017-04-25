@@ -378,7 +378,7 @@
 		
 		/*根据口令查询当前用户的红包,检查是否已抢过*/
 		function getRegbagByPass(pass,callback){
-			var param={"pass":pass,"inviter":inviter};
+			var param={"pass":pass};
 			ajaxData(Host+"All?SL=RedPacket&SLM=getbytakeuser",function(data){
 				callback&&callback(data);
 			},param,function(){
@@ -398,7 +398,7 @@
 		
 		/*抢红包*/
 		function takeRegbag(pass){
-			var param={"pass":pass};
+			var param={"pass":pass,"inviter":inviter};
 			ajaxData(Host+"All?SL=RedPacket&SLM=takebypass",function(data){
 				//成功
 				if(data.Code==2000||data.Code==2001){
